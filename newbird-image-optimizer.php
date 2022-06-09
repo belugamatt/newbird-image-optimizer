@@ -9,18 +9,10 @@ Author URI:   https://newbirddesign.com
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  newbird-image-optimizer
-Domain Path:  /languages
 */
 
 require_once('vendor/autoload.php');
 use Spatie\ImageOptimizer\OptimizerChainFactory;
-
-// Settings page
-//   Compression percentage
-//   Database values tracking amount saved
-//   Using amount saved to calculate load time improvements
-//   Video compressor https://github.com/PHP-FFMpeg/PHP-FFMpeg
-//   Form to compress all images from given month (or all in general)
 
 $plugin_dir = plugin_basename( __FILE__ );
 
@@ -85,23 +77,23 @@ function settings_page() {
     $output = $code = '';
     exec('which ' . $name . ' 2>&1', $output, $code);
 
-    if($name === 'svgo') {
-      if($code !== 0) {
-        // exec('
-        //   curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash &&
-        //   export NVM_DIR="$HOME/.nvm &&
-        //   [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh" &&
-        //   [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion" &&
-        //   source ~/.profile &&
-        //   nvm install 10.13.0 &&
-        //   npm install -g svgo@1.3.2 &&
-        //   which svgo 2>&1
-        // ', $output);
-      }
-      // exec('NVM_DIR=$HOME/nvm && nvm use 10.13.0 && npm list -g | grep svgo 2>&1', $output, $code);
-      exec('nvm install 10.13.0', $output, $code);
-      file_put_contents("/tmp/muh", var_export($output, true), 8);
-    }
+    // if($name === 'svgo') {
+    //   if($code !== 0) {
+    //     // exec('
+    //     //   curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash &&
+    //     //   export NVM_DIR="$HOME/.nvm &&
+    //     //   [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh" &&
+    //     //   [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion" &&
+    //     //   source ~/.profile &&
+    //     //   nvm install 10.13.0 &&
+    //     //   npm install -g svgo@1.3.2 &&
+    //     //   which svgo 2>&1
+    //     // ', $output);
+    //   }
+    //   // exec('NVM_DIR=$HOME/nvm && nvm use 10.13.0 && npm list -g | grep svgo 2>&1', $output, $code);
+    //   exec('nvm install 10.13.0', $output, $code);
+    //   file_put_contents("/tmp/muh", var_export($output, true), 8);
+    // }
 
     if($code === 0) {
       $packages[$name]['installed'] = true;
@@ -150,6 +142,11 @@ function settings_page() {
 
   <div class="wrap">
     <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+
+    <h3><?php echo __('Known issues', 'optim'); ?></h3>
+    <ul>
+      <li>Plugin can't detect presence of svgo</li>
+    </ul>
 
     <div class="Messages">
       <h3><?php echo __('Required packages', 'optim'); ?></h3>

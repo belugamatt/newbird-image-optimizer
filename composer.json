@@ -1,6 +1,7 @@
 {
-    "name": "belugamatt/newbird-image-optimizer",
+	"name": "belugamatt/newbird-image-optimizer",
 	"description": "A plugin to help optimize images as they are uploaded to WordPress. (Requires additional node packages to function)",
+	"version": "0.1-dev",
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0-or-later",
 	"authors": [
@@ -9,7 +10,7 @@
 			"email": "matt@newbirddesign.com"
 		}
 	],
-    "require": {
-        "spatie/image-optimizer": "^1.6"
-    }
+	"require": {
+		"spatie/image-optimizer": "^1.6"
+	}
 }
